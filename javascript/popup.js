@@ -15,8 +15,12 @@ $(document).ready(function () {
     req2.send(null);
 
     function showData() {
-      var resp = JSON.parse(req.responseText); 
-      photo = resp.profile_picture;
+      resp = JSON.parse(req.responseText); 
+      var photo = resp.profile_picture;
+      var active_promo = resp.has_active_promo;
+      $("#has_active_promo").html(" "+active_promo+" ");
+      $("#band_bucks").html(resp.bandbucks);
+
       $("#loading").hide();
       $("#logo").append($("<img/>", {"src": photo}))
 //    $("<img/>", {"src": photo}).appendTo("body");
