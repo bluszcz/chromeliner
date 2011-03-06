@@ -1,0 +1,14 @@
+{
+  "name": "Headnliner.fm unofficial extension",
+  "version": "0.1",
+  "description": "Simply helper for Headliner.fm",
+  "browser_action": {
+    "default_icon": "headliner_noactive.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "http://headliner.fm/",
+    "notifications"
+
+  ]
+}
