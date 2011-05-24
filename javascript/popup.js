@@ -1,5 +1,10 @@
-$(document).ready(function () {
+function openTab() {
+    activeTab = chrome.tabs.create({url:"http://headliner.fm/exchange", pinned:false});
+}
 
+
+$(document).ready(function () {
+    $('#link_trigger').click(openTab);
     var main = $("#main");
     var url = "http://headliner.fm/exchange/account/band_summary_info";
     var url2 = "http://headliner.fm/exchange/dashboard/requests_and_notifications";
@@ -9,13 +14,17 @@ $(document).ready(function () {
     req.open("GET",url,true);
     req.onload = showData;
     req.send(null);
-
     req2.open("GET",url2,true);
     req2.onload = showPromotion;
     req2.send(null);
 
     function showData() {
-      resp = JSON.parse(req.responseText); 
+      if (req.responseText[0]=='<') {
+         activeTab = chrome.tabs.create({url:"http://headliner.fm/exchange", pinned:false});
+         $('#main').html('<h2>You have been logged to Headliner.fm to use this extension</h2>');
+        };
+      resp = JSON.parse(req.responseText);
+      alert(resp);
       var photo = resp.profile_picture;
       var active_promo = resp.has_active_promo;
       $("#has_active_promo").html(" "+active_promo+" ");
